@@ -33,7 +33,9 @@ jobs:
           cd ../var/www
           git pull origin master
           cd marketeer
-          docker stop marketeer
-          docker rm marketeer
+          if docker ps -a | grep -q marketeer; then
+            docker stop marketeer
+            docker rm marketeer
+          fi
           docker build -t marketeer .
           docker run -d -p 80:3000 --name marketeer marketeer
