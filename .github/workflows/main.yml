@@ -12,6 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - run: |
+        git config user.name Ahl-am
+        git config user.email ahlam.ibra01@gmail.com
 
     # Your SSH step
     - name: Run sshpass commands
@@ -22,8 +25,7 @@ jobs:
         pass: ${{ secrets.SERVER_PASS }}
         run: |
           cd ../var/www/marketeer
-          remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
-          git pull "$remote_repo" master
+          git pull origin master
           if docker ps -a | grep -q marketeer; then
             docker stop marketeer
             docker rm marketeer
