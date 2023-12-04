@@ -30,9 +30,8 @@ jobs:
         user: ${{ secrets.SERVER_USER }}
         pass: ${{ secrets.SERVER_PASS }}
         run: |
-          cd ../var/www
+          cd ../var/www/marketeer
           git pull origin master
-          cd marketeer
           if docker ps -a | grep -q marketeer; then
             docker stop marketeer
             docker rm marketeer

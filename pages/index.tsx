@@ -33,7 +33,7 @@ export default function Home() {
         />
       </Head>
       <h1 className="text-secondary text-[30px] sm:text-[40px] lg:text-[55px] text-center pt-5 font-montserrat font-semibold">
-        Marketeer - Automated
+        Marketeer - Automated2
       </h1>
       <h2 className="text-white  text-[18px] sm:text-[24px] lg-text[30px] text-center py-2 mb-6">
         Your Marketing Plan Architect
