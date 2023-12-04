@@ -12,14 +12,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-      
-    # Configure Git credentials
-    - name: Configure Git Credentials
-      run: |
-        git config --global credential.helper '!f() { echo "username=${ACTIONS_USER}"; echo "password=${ACTIONS_TOKEN}"; }; f'
-      env:
-        ACTIONS_USER: ${{ secrets.MY_GITHUB_USERNAME }}
-        ACTIONS_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
 
     # Your SSH step
     - name: Run sshpass commands
@@ -30,7 +22,8 @@ jobs:
         pass: ${{ secrets.SERVER_PASS }}
         run: |
           cd ../var/www/marketeer
-          git pull origin master
+          remote_repo="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git pull "$remote_repo" master
           if docker ps -a | grep -q marketeer; then
             docker stop marketeer
             docker rm marketeer
