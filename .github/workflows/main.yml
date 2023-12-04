@@ -30,5 +30,8 @@ jobs:
         user: ${{ secrets.SERVER_USER }}
         pass: ${{ secrets.SERVER_PASS }}
         run: |
-          pwd
-          ls -lha
+          cd ../var/www
+          git pull origin master
+          cd marketeer
+          docker build -t marketeer .
+          docker run -d -p 80:3000 --name marketeer marketeer
